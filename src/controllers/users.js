@@ -64,6 +64,12 @@ export const addUser = (req, res) => {
         })
     }
 
+    if (USERS.filter(user => user.name == name).length == 1) {
+        return res.status(409).json({ messege: `Name ${name} is exists, try to use another name!`})
+    }
+
+
+
     id++;
     USERS.push({
         id: id,
