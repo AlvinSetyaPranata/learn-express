@@ -4,4 +4,7 @@ export default function authMiddleware(req, res, next) {
     if (!api_key) {
         return res.status(403).json({messege: "No API Key Provided"})
     }
+
+    next();
 }
+
