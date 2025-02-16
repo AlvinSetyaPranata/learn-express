@@ -1,6 +1,6 @@
 import express from "express";
-import { addUser, getUserById, getUsers, updateUser } from "../controllers/users.js";
-import authMiddleware from "../middlewares/users.js";
+import { addUser, getUserById, getUsers, updateUser } from "../controllers/userController.js";
+import authMiddleware from "../middlewares/authMiddleware.js";
 
 
 const userRoutes = express.Router();
