@@ -25,6 +25,36 @@ export const getUserById = (req, res) => {
 }
 
 
+export const updateUser = (req, res) => {
+    const { id } = req.query;
+    const { name, age, gender } = req.body;
+
+    const parsedId = parseInt(id, 10);
+
+    if (!name && !age && !gender) {
+        return res.status(400).json({
+            messege: "Name, Age, Gender cannot be empty"
+        })
+    }
+
+    const index = USERS.findIndex(userObj => userObj.id == parsedId);
+
+    if (index == -1) return res.status(404).json({message: "User with given id is not found"})
+
+    const newUser = {
+        ...USERS[index],
+        name: name,
+        age: age,
+        gender: gender
+    }
+    
+    USERS.splice(index, 1, newUser)
+
+    return res.status(200).json({message: "User with given id successfully updated!"})
+
+}
+
+
 export const addUser = (req, res) => {
     const { name, age, gender } = req.body;
 
