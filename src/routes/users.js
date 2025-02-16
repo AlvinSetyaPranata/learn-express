@@ -1,5 +1,5 @@
 import express from "express";
-import { addUser, getUserById, getUsers, updateUser } from "../controllers/userController.js";
+import { addUser, deleteUser, getUserById, getUsers, updateUser } from "../controllers/userController.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 
 
@@ -10,6 +10,7 @@ userRoutes.get("/", getUsers);
 userRoutes.get("/:id", getUserById)
 userRoutes.post("/", authMiddleware, addUser);
 userRoutes.put("/", authMiddleware, updateUser);
+userRoutes.delete("/", authMiddleware, deleteUser);
 
 
 export default userRoutes;

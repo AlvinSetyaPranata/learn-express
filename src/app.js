@@ -9,7 +9,7 @@ app.use("/api/users", userRoutes);
 
 
  app.listen(8000, () => {
-    console.info("Application starts with http://localhost:3000");
+    console.info("Application starts with http://localhost:8000");
  })
 
  export default app;

@@ -6,9 +6,7 @@ const USERS = [
 let id = 2;
 
 
-export const getUsers = (req, res) => {
-    res.json(USERS)
-};
+export const getUsers = (req, res) => res.status(200).json(USERS)
 
 
 export const getUserById = (req, res) => {
@@ -17,7 +15,7 @@ export const getUserById = (req, res) => {
     const user = USERS.filter(user => user.id == parseInt(id, 10))
 
     if (user.length == 0) {
-        return res.status(400).json({ messege: `User with given id ${id} is not found` })
+        return res.status(404).json({ messege: `User with given id ${id} is not found` })
     }
 
     return res.status(200).json(user[0])
@@ -31,7 +29,7 @@ export const updateUser = (req, res) => {
 
     const parsedId = parseInt(id, 10);
 
-    if (!name && !age && !gender) {
+    if (!name || !age || !gender) {
         return res.status(400).json({
             messege: "Name, Age, Gender cannot be empty"
         })
@@ -79,4 +77,20 @@ export const addUser = (req, res) => {
     });
 
     return res.status(200).json({ messege: `${name} is successfully registered as user` })
+}
+
+export const deleteUser = (req, res) => {
+    const { name } = req.query;
+
+    if (USERS.filter(user => user.name == name).length == 0) {
+        return res.status(404).json({ messege: "User not found" });
+    }
+
+
+    const index = USERS.findIndex(userObj => userObj.name == name);
+
+    USERS.splice(index, 1);
+
+    return res.status(200).json({ messege: "Data deleted successfully" })
+
 }
